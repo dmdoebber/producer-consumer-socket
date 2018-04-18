@@ -40,18 +40,14 @@ public class posto extends Thread{
             
             msg = (mensagem) objectIn.readObject();
             if ((msg.getTipo()).equals("POP")) {
-                if(tanque.pop(num))
-                    msg.setNumero(msg.getNumero());
-                else
+                if(!tanque.pop(msg.getNumero()))
                     msg.setNumero((short)0);
                 msg.setTipo("RET_POP");
                 objectOut.writeObject(msg);
             }
             
             if((msg.getTipo()).equals("PUSH")){
-                if(tanque.push(num))
-                    msg.setNumero(msg.getNumero());
-                else
+                if(!tanque.push(msg.getNumero()))
                     msg.setNumero((short)0);
                 msg.setTipo("RET_PUSH");
                 objectOut.writeObject(msg);
